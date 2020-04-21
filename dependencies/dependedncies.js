@@ -1,25 +1,25 @@
 const path = require('path');
 // import middlewares
-const middlewares = require('./../middlewares/middlewares');
+const {compression, express, cookieParser, auth, logger} = require('./../middlewares/middlewares');
+// const logger = require('./../middlewares/logger/logger').logger;
 // import auth module to setup authentication on routes
-const auth = middlewares.auth.keycloak();
+const authenticator = auth.keycloak();
 // setup express dependencies
-const app = middlewares.express();
+const app = express();
 
 // setup initials
-app.use(middlewares.compression());
-app.use(middlewares.logger('dev'));
-app.use(middlewares.express.json());
-app.use(middlewares.express.urlencoded({ extended: false }));
-app.use(middlewares.cookieParser());
-app.use(middlewares.express.static(path.join(__dirname, './../public')));
-
+app.use(compression());
+app.use(logger.winstonHttpLogger);
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, './../public')));
 
 // setup authentication
-app.use(auth.expressSession(auth.sessionConfig));
-app.use(auth.keycloak.middleware());
+app.use(authenticator.expressSession(authenticator.sessionConfig));
+app.use(authenticator.keycloak.middleware());
 
 module.exports = {
     app,
-    auth: {keycloak: auth.keycloak}
+    auth: {keycloak: authenticator.keycloak},
 }
