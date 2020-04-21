@@ -3,5 +3,5 @@ const authMiddleWare = require('./auth/auth.js');
 
 module.exports = {
     ...coreMiddlewares,
-    auth: authMiddleWare.keycloak(),
+    auth: {keycloak: authMiddleWare.keycloak},
 }
