@@ -5,6 +5,7 @@ const middlewares = require('./../middlewares/middlewares');
 const app = middlewares.express();
 
 // setup initials
+app.use(middlewares.compression());
 app.use(middlewares.logger('dev'));
 app.use(middlewares.express.json());
 app.use(middlewares.express.urlencoded({ extended: false }));
