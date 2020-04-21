@@ -1,11 +1,7 @@
-const logger = require('morgan');
-const cookieParser = require('cookie-parser');
-const express = require('express');
-const compression = require('compression');
+const coreMiddlewares = require('./core/core');
+const authMiddleWare = require('./auth/auth.js');
 
 module.exports = {
-    logger,
-    cookieParser,
-    express,
-    compression,
+    ...coreMiddlewares,
+    auth: authMiddleWare.keycloak(),
 }
