@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname, './../public')));
 app.use(authenticator.expressSession(authenticator.sessionConfig));
 app.use(authenticator.keycloak.middleware());
 
+
 module.exports = {
     app,
     auth: {keycloak: authenticator.keycloak},
