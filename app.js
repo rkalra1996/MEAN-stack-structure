@@ -1,7 +1,6 @@
 // import all the dependencies
-const dependencies = require('./dependencies/dependedncies');
 const routes = require('./routes/routes');
-const app = dependencies.app;
+const {app} = require('./dependencies/dependedncies');
 
 app.use('/api',routes)
 
