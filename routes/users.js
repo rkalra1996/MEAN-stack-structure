@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require('./../middlewares/middlewares').express;
 var router = express.Router();
 const logger = require('./../middlewares/middlewares').logger.default;
 /* GET users listing. */

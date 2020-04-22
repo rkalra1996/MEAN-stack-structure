@@ -6,6 +6,8 @@ const logger = require('./middlewares/middlewares').logger.winston;
 const app = dependencies.app;
 
 
+app.use('/health', routes.healthRouter);
+
 app.use('/users', dependencies.auth.keycloak.protect(), (req, res, next) => {
     logger.info('i am here users')
     // logger.info(JSON.stringify(req.kauth.grant.access_token.content));
