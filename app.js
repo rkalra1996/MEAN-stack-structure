@@ -1,7 +1,7 @@
 // import all the dependencies
 const dependencies = require('./dependencies/dependedncies');
 const routes = require('./routes/routes');
-const logger = require('./middlewares/middlewares').logger.winston;
+const logger = require('./middlewares/middlewares').logger.default;
 
 const app = dependencies.app;
 
