@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const logger = require('./../middlewares/middlewares').logger.winston;
+const logger = require('./../middlewares/middlewares').logger.default;
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   logger.info('sending response from /users api');
