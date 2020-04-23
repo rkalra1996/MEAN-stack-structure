@@ -7,6 +7,6 @@ app.use('/health', auth.keycloak.protect(), healthRouter)
 // for all other api routes
 app.use('/api', routes);
 // register keycloack logout url
-app.use( auth.keycloak.middleware( { logout: '/'} ));
+app.use( auth.keycloak.middleware( { logout: '/exit'} ));
 
 module.exports = app;
