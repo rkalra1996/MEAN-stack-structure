@@ -1,5 +1,8 @@
 const path = require('path');
+
+const apiFilterExpression = `/v1/*`;
 const {httpProxyReqPathResolver, uplinkServerAddress} = require('./utils/reverse-proxy-utils');
+
 const httpLogger = require('./../middlewares/middlewares').logger.winstonHttpLogger;
 const {compression, express,cookieParser, auth, httpProxy} = require('./../middlewares/middlewares');
 // setup authentication on routes
@@ -16,8 +19,8 @@ app.use(express.static(path.join(__dirname, './../public')));
 // setup authentication
 app.use(authenticator.expressSession(authenticator.sessionConfig));
 app.use(authenticator.keycloak.middleware());
-// use reverse proxy
-app.use(httpProxy(uplinkServerAddress, true, httpProxyReqPathResolver));
+// use reverse proxy to redirect all requests starting from /api
+app.use(apiFilterExpression, httpProxy(uplinkServerAddress, true, httpProxyReqPathResolver));
 
 module.exports = {
     app,

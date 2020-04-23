@@ -1,6 +1,6 @@
-const express = require('./../../middlewares/middlewares').express;
+const express = require('./../middlewares/middlewares').express;
 const router = express.Router();
-const logger = require('./../../middlewares/middlewares').logger.default;
+const logger = require('./../middlewares/middlewares').logger.default;
 
 router.get('', function (req,res) {
     logger.info('/health API triggered, checking health of system');

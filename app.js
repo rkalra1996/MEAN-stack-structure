@@ -1,10 +1,12 @@
 // import all the dependencies
-require('dotenv').config();
 const routes = require('./routes/routes');
 const {app,auth} = require('./dependencies/dependedncies');
-
-/* app.use('/v1/api/users/*',require('./routes/v1/users')); */
-app.use('/api',routes)
+const healthRouter = require('./routes/health');
+// health api for aplication usage
+app.use('/health', auth.keycloak.protect(), healthRouter)
+// for all other api routes
+app.use('/api', routes);
+// register keycloack logout url
 app.use( auth.keycloak.middleware( { logout: '/'} ));
 
 module.exports = app;
