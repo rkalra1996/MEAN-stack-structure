@@ -20,7 +20,13 @@ app.use(express.static(path.join(__dirname, './../public')));
 app.use(authenticator.expressSession(authenticator.sessionConfig));
 app.use(authenticator.keycloak.middleware());
 // use reverse proxy to redirect all requests starting from /api
-app.use(apiFilterExpression, httpProxy(uplinkServerAddress, true, httpProxyReqPathResolver));
+
+function consoleForMiddleWare(req,res,next) {
+    console.log('filtered api ', req.originalUrl);
+    console.log('redirecting to ', uplinkServerAddress);
+    next();
+}
+app.use(apiFilterExpression, consoleForMiddleWare, httpProxy(uplinkServerAddress, true, httpProxyReqPathResolver));
 
 module.exports = {
     app,
